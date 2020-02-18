@@ -2,7 +2,7 @@
   "description": "React Native Scales Converters",
   "main": "index.ts",
   "name": "react-native-scales",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "khtwah",
     "step",

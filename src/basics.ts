@@ -1,7 +1,7 @@
 import { Dimensions, StatusBar, Platform } from "react-native"
 
-const isAndroid = Platform.OS === 'android' && Platform.Version > 26
-const { width: screenWidth, height: screenHeight } = Dimensions.get(isAndroid ? "screen" : "window")
+const isAndroid = Platform.OS === 'android'
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window")
 
 const is_X_Ratio = ((screenHeight / screenWidth) == (812 / 375))
 
@@ -17,7 +17,7 @@ const sWidth = screenWidth
 /**
  * Screen Height
  */
-const sHeight = isAndroid ? screenHeight + StatusBar.currentHeight : screenHeight
+const sHeight = isAndroid ? screenHeight - StatusBar.currentHeight : screenHeight
 
 /**
  * Horizontal Size Scale
