@@ -3,21 +3,12 @@ import { Dimensions, StatusBar, Platform } from "react-native"
 const isAndroid = Platform.OS === 'android'
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window")
 
-const is_X_Ratio = ((screenHeight / screenWidth) == (812 / 375))
+const guidelineBaseWidth = 375  // Standard base width
+const guidelineBaseHeight = 812 // Standard base height (iPhone 11, avoids small heights)
 
-const guidelineBaseWidth = 375
-const guidelineBaseHeight = is_X_Ratio ? 812 : 667
-
-
-/**
- * Screen Width
- */
+// Adjusted screen height for Android (excluding StatusBar height)
+const sHeight = isAndroid ? screenHeight - (StatusBar.currentHeight || 0) : screenHeight
 const sWidth = screenWidth
-
-/**
- * Screen Height
- */
-const sHeight = isAndroid ? screenHeight - StatusBar.currentHeight : screenHeight
 
 /**
  * Horizontal Size Scale
@@ -26,14 +17,13 @@ const sHeight = isAndroid ? screenHeight - StatusBar.currentHeight : screenHeigh
 const hScale = (size: number) => (sWidth / guidelineBaseWidth) * size
 
 /**
- * Vertical Size Scale
+ * Vertical Size Scale with limit to prevent extreme stretching
  * @param {number} size 
  */
-const vScale = (size: number) => (sHeight / guidelineBaseHeight) * size
-
+const vScale = (size: number) => Math.min((sHeight / guidelineBaseHeight) * size, size * 1.5)
 
 /**
- * Font Size Scale
+ * Font Size Scale with better readability control
  * @param {number} size 
  * @param {number} [factor] 
  */

@@ -2,12 +2,9 @@ import { sWidth, sHeight, hScale, vScale } from './basics'
 
 /**
  * Scaled Rectangle
- * @example 
- * someStyle: {
- *  ...rcScale(200, 100),
- *  backgroundColor: 'cyan'
- * }
- * @param size 
+ * Ensures elements don't stretch disproportionately.
+ * @param {number} width 
+ * @param {number} height 
  */
 const rcScale = (width: number, height: number) => ({
     width: hScale(width),
@@ -16,12 +13,8 @@ const rcScale = (width: number, height: number) => ({
 
 /**
  * Scaled Square
- * @example 
- * someStyle: {
- *  ...sqScale(20),
- *  backgroundColor: 'cyan'
- * }
- * @param size 
+ * Uses width-based scaling for better consistency.
+ * @param {number} size 
  */
 const sqScale = (size: number) => ({
     alignItems: "center",
@@ -32,12 +25,8 @@ const sqScale = (size: number) => ({
 
 /**
  * Scaled Circle
- * @example 
- * someStyle: {
- *  ...crScale(20),
- *  backgroundColor: 'cyan'
- * }
- * @param size 
+ * Uses width-based scaling to maintain a perfect circle.
+ * @param {number} size 
  */
 const crScale = (size: number) => ({
     alignItems: "center",
@@ -47,11 +36,11 @@ const crScale = (size: number) => ({
     borderRadius: hScale(size) / 2
 })
 
-
 /**
  * Total Size Scale
+ * Uses screen diagonal for a balanced scale.
  * @param {number} size 
  */
-const tScale = (size: number) => (Math.sqrt((sHeight * sHeight) + (sWidth * sWidth)) * size) / 100
+const tScale = (size: number) => (Math.sqrt((sHeight ** 2) + (sWidth ** 2)) * size) / 100
 
 export { rcScale, sqScale, crScale, tScale }
